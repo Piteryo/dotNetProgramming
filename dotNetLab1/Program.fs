@@ -42,9 +42,9 @@ let labOneThirdTask() =
     let secondShip = Ship()
    // firstShip <- Ship()
     printfn "Number of ships %i" Ship.NumberOfShips
-    GC.Collect()
-    System.Threading.Thread.Sleep(1000)
-    printfn "Number of ships %i" Ship.NumberOfShips
+    //GC.Collect()
+    //System.Threading.Thread.Sleep(1000)
+    //printfn "Number of ships %i" Ship.NumberOfShips
     let thirdShip = Ship()
     let shipSeq = seq{yield (firstShip, 1); yield (secondShip, 2); yield (thirdShip, 3) }
     for (ship, i) in shipSeq do
@@ -77,10 +77,21 @@ let labThreeFirstTask() =
     
 [<EntryPoint>]
 let main argv = 
-    //labOneFirstTask()
-    //labOneThirdTask()
-    //labTwo()
-    labThreeFirstTask()
+    Console.WriteLine("Please choose task (1.1, 1.3, 2.1, 3.1 (Write :wq to exit)")
+    let mutable input = Console.ReadLine().Split ' '
+    while input.[0] <> ":wq" do
+        match input.[0] with
+            | "1.1" -> labOneFirstTask()
+            | "1.3" -> labOneThirdTask()
+            | "2.1" -> labTwo()
+            | "3.1" -> labThreeFirstTask()
+            | _ -> ()
+        Console.WriteLine("Please choose task (1.1, 1.3, 2.1, 3.1 (Write :wq to exit)")
+        input <- Console.ReadLine().Split ' '
+    ////labOneFirstTask()
+    ////labOneThirdTask()
+    ////labTwo()
+    //labThreeFirstTask()
     0 // return an integer exit code
 
 
